@@ -1,9 +1,11 @@
 import React from 'react';
+
+import config from '../config';
 import { Users } from '../components/Users';
 
 class MainPage extends React.Component {
 	state = {
-		url: 'https://jsonplaceholder.typicode.com'
+		url: config.mainUrl
 	};
 
 	componentDidMount = () => {
