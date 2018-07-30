@@ -49,7 +49,7 @@ export class Users extends React.Component {
 		let users = 
 			!this.state.users ?
 			<p>No users in the list</p> :
-			this.state.users.map((el, i) => <p id={i + 1} key={`user${i}`} onClick={this.getPosts}> {el} </p>);
+			this.state.users.map((el, i) => <p id={el.id} key={`user${el.id}`} onClick={this.getPosts}> {el.name} </p>);
 
 		let posts;
 
