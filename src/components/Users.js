@@ -5,7 +5,7 @@ export class Users extends React.Component {
 		users: this.props.data,
 		url: this.props.url,
 		active: 0,
-		currentPosts: ''
+		currentPosts: {}
 	}
 
 	componentWillReceiveProps = (nextProps) => {
@@ -21,10 +21,23 @@ export class Users extends React.Component {
 				response = await fetch(`${this.state.url}/posts?userId=${id}`),
 				data = await response.json();
 
-			this.setState({
-				active: id,
-				currentPosts: data
-			});
+			if (!this.state.currentPosts[id])
+			{
+				let posts = this.state.currentPosts;
+				posts[id] = data;
+
+				this.setState({
+					active: id,
+					currentPosts: posts
+				});
+			}
+
+			else
+			{
+				this.setState({
+					active: id
+				});				
+			}
 		}
 
 		catch(error) {
@@ -38,15 +51,20 @@ export class Users extends React.Component {
 			<p>No users in the list</p> :
 			this.state.users.map((el, i) => <p id={i + 1} key={`user${i}`} onClick={this.getPosts}> {el} </p>);
 
-		let posts =
-				this.state.currentPosts === '' ?
-				<p>user is not selected</p> :
-				this.state.currentPosts.map((el, i) =>
-					<div>
-						<p>{`Post id is ${el.id}`}</p>
-						<p>{el.title}</p>
-					</div>
-				)
+		let posts;
+
+		if (Object.keys(this.state.currentPosts).length === 0)
+			posts = <p>user is not selected</p>;
+
+		else
+		{
+			posts = this.state.currentPosts[this.state.active].map((el, i) =>
+				<div key={`post${i}`}>
+					<p>{`Post id is ${el.id}`}</p>
+					<p>{el.title}</p>
+				</div>
+			);
+		}
 
 		return (
 			<div>
