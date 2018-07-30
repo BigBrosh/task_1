@@ -30,7 +30,7 @@ class MainPage extends React.Component {
 	render = () => {
 		return (
 			<div>
-				<Users data={this.state.users} />
+				<Users data={this.state.users} url={this.state.url}/>
 			</div>
 		);
 	}
