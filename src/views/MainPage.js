@@ -1,19 +1,21 @@
 import React from 'react';
+
+import { RequestController } from '../controllers/RequestController';
+
 import { Users } from '../components/Users';
 
 class MainPage extends React.Component {
 	state = {
-		url: 'https://jsonplaceholder.typicode.com'
-	};
+		users: null
+	}
 
-	componentDidMount = () => {
+	componentDidMount() {
 		this.getUsers();
 	}
 
 	getUsers = async () => {
 		try {
-			let response = await fetch(`${this.state.url}/users`),
-				data = await response.json();
+			const data = await RequestController.getUsers();
 
 			this.setState({
 				users: data
@@ -25,10 +27,12 @@ class MainPage extends React.Component {
 		}
 	}
 
-	render = () => {
+	render() {
+		const { users } = this.state;
+
 		return (
 			<div>
-				<Users data={this.state.users} url={this.state.url}/>
+				{ users && <Users users={this.state.users} /> }
 			</div>
 		);
 	}
