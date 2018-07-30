@@ -14,7 +14,7 @@ export class Users extends React.Component {
 			{
 				const data = await RequestController.getPosts(id);
 
-				const posts = this.state.currentPosts;
+				let posts = this.state.currentPosts;
 				posts[id] = data;
 
 				this.setState({
@@ -44,13 +44,16 @@ export class Users extends React.Component {
 
 		return (
 			<div>
-				{users.map((el, i) => <p id={el.id} key={`user${el.id}`} onClick={this.getPosts(el.id)}> {el.name} </p>)}
+				{users.map(user => 
+					<p 	id={user.id} 
+						key={`user${user.id}`}
+						onClick={this.getPosts(user.id)}> {user.name} </p>)}
 				<hr/>
 
-				{this.state.active !== null && this.state.currentPosts[this.state.active].map((el, i) =>
-					<div key={`post${i}`}>
-						<p>{`Post id is ${el.id}`}</p>
-						<p>{el.title}</p>
+				{this.state.active !== null && this.state.currentPosts[this.state.active].map(post =>
+					<div key={`post${post.id}`}>
+						<p>{`Post id is ${post.id}`}</p>
+						<p>{post.title}</p>
 					</div>
 				)}
 			</div>			
