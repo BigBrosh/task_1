@@ -1,34 +1,61 @@
 import React from 'react';
 
-import {Link} from 'react-router-dom';
+import { RequestController } from '../controllers/RequestController';
 
 export class Users extends React.Component {
 	state = {
-		users: this.props.data,
-		url: this.props.url
+		active: null,
+		currentPosts: {}
 	}
 
-	componentWillReceiveProps = (nextProps) => {
-		if (nextProps !== this.state.users)
-			this.setState({
-				users: nextProps.data
-			});
+	getPosts = id => async () => {
+		try {
+			if (!this.state.currentPosts[id])
+			{
+				const data = await RequestController.getPosts(id);
+
+				let posts = this.state.currentPosts;
+				posts[id] = data;
+
+				this.setState({
+					active: id,
+					currentPosts: posts
+				});
+			}
+
+			else
+			{
+				this.setState({
+					active: id
+				});				
+			}
+		}
+
+		catch(error) {
+			console.error(error);
+		}
 	}
 
-	render = () => {
-		let users = 
-			!this.state.users ?
-			<p>No users in the list</p> :
-			this.state.users.map((el, i) =>
-				<Link 	to={`users/nickname=${el.name}&id=${el.id}`}
-						id={el.id}
-						key={`user${el.id}`}
-						onClick={this.getPosts}
-						style={{ display: 'block', marginBottom: 5, textDecoration: 'none'}}> {el.name} </Link>);		
+	render() {
+		const { users } = this.props;
+		
+		if(!users)
+			return <p>No users in the list</p>;
 
 		return (
 			<div>
-				{users}
+				{users.map(user => 
+					<p 	id={user.id} 
+						key={`user${user.id}`}
+						onClick={this.getPosts(user.id)}> {user.name} </p>)}
+				<hr/>
+
+				{this.state.active !== null && this.state.currentPosts[this.state.active].map(post =>
+					<div key={`post${post.id}`}>
+						<p>{`Post id is ${post.id}`}</p>
+						<p>{post.title}</p>
+					</div>
+				)}
 			</div>			
 		)
 	}
