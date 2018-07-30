@@ -1,9 +1,10 @@
 import React from 'react';
 
-import {Router, Route} from 'react-router-dom';
+import {Router, Route, Switch} from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 
 import MainPage from './views/MainPage';
+import ViewPage from './views/ViewPage';
 
 const history = createBrowserHistory();
 
@@ -16,7 +17,10 @@ class App extends React.Component {
 	render = () => {
 		return(
 			<Router history={history}>
-				<Route exact path="/" component={MainPage} />
+				<Switch>
+					<Route exact path="/" component={MainPage} />
+					<Route path="/:id" component={ViewPage} />
+				</Switch>
 			</Router>
 		)
 	}

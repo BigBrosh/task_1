@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { RequestController } from '../controllers/RequestController';
+import {Link} from 'react-router-dom';
+
+import { Requests } from '../controllers/Requests';
 
 export class Users extends React.Component {
 	state = {
@@ -12,9 +14,9 @@ export class Users extends React.Component {
 		try {
 			if (!this.state.currentPosts[id])
 			{
-				const data = await RequestController.getPosts(id);
+				const data = await Requests.getPosts(id);
 
-				let posts = this.state.currentPosts;
+				const posts = this.state.currentPosts;
 				posts[id] = data;
 
 				this.setState({
@@ -45,17 +47,9 @@ export class Users extends React.Component {
 		return (
 			<div>
 				{users.map(user => 
-					<p 	id={user.id} 
-						key={`user${user.id}`}
-						onClick={this.getPosts(user.id)}> {user.name} </p>)}
-				<hr/>
-
-				{this.state.active !== null && this.state.currentPosts[this.state.active].map(post =>
-					<div key={`post${post.id}`}>
-						<p>{`Post id is ${post.id}`}</p>
-						<p>{post.title}</p>
-					</div>
-				)}
+					<Link 	to={`${user.id}`}
+							style={{ display: 'block', marginBottom: 10}}
+							key={`user${user.id}`}> {user.name} </Link>)}
 			</div>			
 		)
 	}

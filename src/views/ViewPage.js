@@ -1,32 +1,26 @@
 import React from 'react';
 
-import config from '../config';
+import { Requests } from '../controllers/Requests';
 
 import { findInLink } from '../helpers/DataHelper';
 
 class UserPostsPage extends React.Component {
 	state = {
-		url: config.mainUrl,
-		nickname: 'User',
 		currentPosts: {}
 	};
 
-	componentDidMount = () => {
-		this.getPosts();
+	componentDidMount = async () => {
+		await this.getPosts();
 	}
 
 	getPosts = async () => {
 		try {
-			let link = this.props.history.location.pathname,
-				id = findInLink(link, 'id'),
-				nickname = findInLink(link, 'nickname'),
-				response = await fetch(`${this.state.url}/posts?userId=${id}`),
-				data = await response.json();
-
+			const link = this.props.history.location.pathname;
+			const id = findInLink(link, '');
+			const currentPosts = await Requests.getPosts(id);
 
 			this.setState({
-				nickname: nickname,
-				currentPosts: data
+				currentPosts: currentPosts
 			});
 		}
 
@@ -43,17 +37,16 @@ class UserPostsPage extends React.Component {
 
 		else
 		{
-			posts = this.state.currentPosts.map((el, i) =>
-				<div key={`post${i}`}>
-					<p>{`Post id is ${el.id}`}</p>
-					<p>{el.title}</p>
+			posts = this.state.currentPosts.map(post =>
+				<div key={post.id}>
+					<p>{`Post id is ${post.id}`}</p>
+					<p>{post.title}</p>
 				</div>
 			);
 		}
 
 		return (
 			<div>
-				<h2 style={{ textAlign: 'center', marginBottom: 40 }}>{`${this.state.nickname}'s posts`}</h2>
 				{posts}
 			</div>
 		);

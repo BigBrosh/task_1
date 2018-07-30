@@ -1,6 +1,6 @@
 import { url } from '../config';
 
-export const RequestController = {
+export const Requests = {
 	getUsers: async function() {
 		const response = await fetch(`${url}/users`);
 		const data = await response.json();

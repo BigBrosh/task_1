@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { RequestController } from '../controllers/RequestController';
+import { Requests } from '../controllers/Requests';
 
 import { Users } from '../components/Users';
 
@@ -15,11 +15,9 @@ class MainPage extends React.Component {
 
 	getUsers = async () => {
 		try {
-			const data = await RequestController.getUsers();
+			const users = await Requests.getUsers();
 
-			this.setState({
-				users: data
-			});
+			this.setState({users});
 		}
 
 		catch(error) {
