@@ -12,6 +12,13 @@ export const Requests = {
 		const response = await fetch(`${url}/posts?userId=${id}`);
 		const data = await response.json();
 
-		return data
+		return data;
+	},
+
+	getAllPosts: async function() {
+		const response = await fetch(`${url}/posts`);
+		const data = await response.json();
+
+		return data;
 	}
 }
