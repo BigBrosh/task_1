@@ -12,9 +12,7 @@ import ViewPage from './views/ViewPage'
 import CommentsPage from './views/CommentsPage'
 
 const history = createBrowserHistory();
-const store = createStore(postsApp);
-
-store.subscribe(() => store.getState());
+const store = createStore(postsApp, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 function App() {
 	return (

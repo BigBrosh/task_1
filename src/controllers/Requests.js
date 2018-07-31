@@ -1,31 +1,14 @@
 import { url } from '../config';
 
-export const Requests = {
-	getUsers: async function() {
-		const response = await fetch(`${url}/users`);
-		const data = await response.json();
+const request = url => fetch(url)
+					.then((r) => r.json())
 
-		return data;
-	},
+export default {
+	getUsers: () => request(`${url}/users`),
 
-	getPosts: async function(id) {
-		const response = await fetch(`${url}/posts?userId=${id}`);
-		const data = await response.json();
+	getPosts: (id) => request(`${url}/posts?userId=${id}`),
 
-		return data;
-	},
+	getAllPosts: () => request(`${url}/posts`),
 
-	getAllPosts: async function() {
-		const response = await fetch(`${url}/posts`);
-		const data = await response.json();
-
-		return data;
-	},
-
-	getComments: async function(id) {
-		const response = await fetch(`${url}/posts/${id}/comments`);
-		const data = await response.json();
-
-		return data;
-	}
+	getComments: (id) => request(`${url}/posts/${id}/comments`)
 }

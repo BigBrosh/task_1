@@ -14,13 +14,13 @@ function Users(props) {
 			{users.map(user => 
 				<Link 	to={`${user.id}`}
 						style={{ display: 'block', marginBottom: 10, textDecoration: 'none'}}
-						key={`user${user.id}`}> {`${user.name} (${posts[user.id].length})`} </Link>)}
+						key={user.id}> 
+						{`${user.name} (${posts.reduce((cur, next) => cur + (next.userId === user.id ? 1 : 0), 0)})`}
+				</Link>)}
 		</div>			
 	)
 }
 
-const mapStateToProps = (state) => {
-	return { ...state };
-}
+const mapStateToProps = (state) => ({ ...state });
 
 export default connect(mapStateToProps)(Users);

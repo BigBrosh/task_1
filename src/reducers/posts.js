@@ -5,7 +5,7 @@ const initialState = [];
 export default function posts (state = initialState, action) {
 	switch(action.type) {
 		case ADD_POSTS:
-			return Object.assign({}, state, action.posts);
+			return [...action.posts]
 
 		default:
 			return state;		

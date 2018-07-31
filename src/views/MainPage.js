@@ -2,77 +2,32 @@ import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
 
-import { Requests } from '../controllers/Requests'
+import requests from '../controllers/requests'
 import { addUsers, addPosts } from '../actions/actions'
 
 import Users from '../components/Users'
 
 class MainPage extends Component {
 	async componentDidMount() {
-		if (this.props.users.length === 0)
-			await this.getUsers();
-
-		if (Object.keys(this.props.posts).length === 0)
-			await this.getAllPosts();
-	}
-
-	getUsers = async () => {
-		try {
-			const users = await Requests.getUsers();
-
+		if (this.props.users.length === 0) {
+			const [users, posts] = await Promise.all( [requests.getUsers(), requests.getAllPosts()])
 			this.props.addUsers(users);
-		}
-
-		catch(error) {
-			console.error(error);
-		}
-	}
-
-	getAllPosts = async () => {
-		try {
-			const currentPosts = await Requests.getAllPosts();
-			const posts = {};
-
-			currentPosts.forEach(post => {
-				if (!posts[post.userId])
-					posts[post.userId] = [].concat(post);
-
-				else
-					posts[post.userId].push(post);
-			})
-
 			this.props.addPosts(posts);
-		}
-
-		catch(error) {
-			console.error(error);
 		}
 	}
 
 	render() {
-		const { users, posts } = this.props;
-
 		return (
-			<div>
-				{ Object.keys(posts).length && users.length && <Users /> }
-			</div>
+			<Users />
 		);
 	}
 }
 
-const mapStateToProps = (state) => {
-	return { ...state };
-}
+const mapStateToProps = ({ users }) => ({ users });
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		addUsers: (users) => {
-			dispatch(addUsers(users))
-		},
-		addPosts: (posts) => {
-			dispatch(addPosts(posts))
-		}
-	}
+const mapDispatchToProps = {
+	addUsers,
+	addPosts
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

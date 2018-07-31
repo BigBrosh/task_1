@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
-import { Requests } from '../controllers/Requests'
+import requests from '../controllers/requests'
 
 class CommentsPage extends Component {
-	id = +this.props.match.params.id;
-
 	state = {
 		comments: null
 	}
 
 	async componentDidMount() {
-		await this.getComments(this.id);
+		const id = +this.props.match.params.id;
+		await this.getComments(id);
 	}
 
 	getComments = async (id) => {
 		try {
-			const comments = await Requests.getComments(id);
+			const comments = await requests.getComments(id);
 
 			this.setState({ comments });
 		}
@@ -25,13 +24,16 @@ class CommentsPage extends Component {
 	}
 
 	render() {
-		console.log(1);
+		console.log(this.props);
+
 		if (!this.state.comments)
 			return <p>No comments yet</p>
 
 		return (
 			<div>
-				{	
+				<button onClick={() => this.props.history.goBack()}>Back</button>
+
+				{
 					this.state.comments.map(comment =>
 						<div key={comment.id}>
 							<p>{`comment id is ${comment.id}`}</p>
