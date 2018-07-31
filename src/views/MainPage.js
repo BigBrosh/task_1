@@ -9,8 +9,8 @@ class MainPage extends React.Component {
 		users: null
 	}
 
-	componentDidMount() {
-		this.getUsers();
+	async componentDidMount() {
+		await this.getUsers();
 	}
 
 	getUsers = async () => {

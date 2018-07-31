@@ -9,18 +9,19 @@ class UserPostsPage extends React.Component {
 		currentPosts: {}
 	};
 
-	componentDidMount = async () => {
+	async componentDidMount () {
 		await this.getPosts();
 	}
 
 	getPosts = async () => {
 		try {
 			const link = this.props.history.location.pathname;
-			const id = findInLink(link, '');
+			console.log(this.props.match);
+			const id = +this.props.match.params.id;
 			const currentPosts = await Requests.getPosts(id);
 
 			this.setState({
-				currentPosts: currentPosts
+				currentPosts
 			});
 		}
 
@@ -30,24 +31,19 @@ class UserPostsPage extends React.Component {
 	}
 
 	render = () => {
-		let posts;
-
 		if (Object.keys(this.state.currentPosts).length === 0)
-			posts = <p>There are no comments yet</p>;
-
-		else
-		{
-			posts = this.state.currentPosts.map(post =>
-				<div key={post.id}>
-					<p>{`Post id is ${post.id}`}</p>
-					<p>{post.title}</p>
-				</div>
-			);
-		}
+			return <p>There are no comments yet</p>;
 
 		return (
 			<div>
-				{posts}
+				{	
+					this.state.currentPosts.map(post =>
+						<div key={post.id}>
+							<p>{`Post id is ${post.id}`}</p>
+							<p>{post.title}</p>
+						</div>
+					)
+				}
 			</div>
 		);
 	}
