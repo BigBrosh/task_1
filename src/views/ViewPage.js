@@ -11,9 +11,8 @@ function UserPostsPage(props) {
 		<div>
 			{	
 				props.posts.filter(post => post.userId === id).map(post => 
-					<div>
-						<Link 	to={`post/${post.id}`}
-								key={post.id}>
+					<div key={post.id}>
+						<Link 	to={`post/${post.id}`}>
 							<p>{`Post id is ${post.id}`}</p>
 						</Link>
 
