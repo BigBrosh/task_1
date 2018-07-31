@@ -9,6 +9,7 @@ import postsApp from './reducers/postsApp'
 
 import MainPage from './views/MainPage'
 import ViewPage from './views/ViewPage'
+import CommentsPage from './views/CommentsPage'
 
 const history = createBrowserHistory();
 const store = createStore(postsApp);
@@ -21,7 +22,8 @@ function App() {
 			<Router history={history}>
 				<Switch>
 					<Route exact path="/" component={MainPage} />
-					<Route path="/:id" component={ViewPage} />
+					<Route exact path="/:id" component={ViewPage} />
+					<Route path="/post/:id" component={CommentsPage} />
 				</Switch>
 			</Router>
 		</Provider>

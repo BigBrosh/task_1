@@ -20,5 +20,12 @@ export const Requests = {
 		const data = await response.json();
 
 		return data;
+	},
+
+	getComments: async function(id) {
+		const response = await fetch(`${url}/posts/${id}/comments`);
+		const data = await response.json();
+
+		return data;
 	}
 }

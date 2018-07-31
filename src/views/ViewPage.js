@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
+
+import {Link} from 'react-router-dom'
 
 import { connect } from 'react-redux'
 
@@ -12,10 +14,11 @@ function UserPostsPage(props) {
 		<div>
 			{	
 				props.posts[id].map(post =>
-					<div key={post.id}>
+					<Link 	to={`post/${post.id}`}
+							key={post.id}>
 						<p>{`Post id is ${post.id}`}</p>
 						<p>{post.title}</p>
-					</div>
+					</Link>
 				)
 			}
 		</div>
