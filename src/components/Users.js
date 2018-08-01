@@ -21,6 +21,6 @@ function Users(props) {
 	)
 }
 
-const mapStateToProps = (state) => ({ ...state });
+const mapStateToProps = ({ users, posts}) => ({ users, posts });
 
 export default connect(mapStateToProps)(Users);

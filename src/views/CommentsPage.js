@@ -24,8 +24,6 @@ class CommentsPage extends Component {
 	}
 
 	render() {
-		console.log(this.props);
-
 		if (!this.state.comments)
 			return <p>No comments yet</p>
 
