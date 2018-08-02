@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
@@ -7,7 +8,14 @@ import { addUsers, addPosts } from '../actions/actions'
 
 import Users from '../components/Users'
 
-class MainPage extends Component {
+type Props = {
+  users: Array<Object>,
+  props: Array<Object>,
+  addUsers: Function,
+  addPosts: Function
+};
+
+class MainPage extends Component<Props> {
 	async componentDidMount() {
 		if (this.props.users.length === 0) {
 			const [users, posts] = await Promise.all( [requests.getUsers(), requests.getAllPosts()])
@@ -16,7 +24,11 @@ class MainPage extends Component {
 		}
 	}
 
+	say = (a: number) => a;
+
 	render() {
+		console.log(this.say(1));
+
 		return (
 			<Users />
 		);
