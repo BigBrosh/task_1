@@ -14,11 +14,15 @@ type Props = {
 
 function UserPostsPage(props: Props) {
 	const id = +props.match.params.id;
+	const posts = props.posts.filter(post => post.userId === id);
+
+	if (posts.length === 0)
+		return <h2>There are no posts yet</h2>
 
 	return (
 		<div>
 			{	
-				props.posts.filter(post => post.userId === id).map(post => 
+				posts.map(post => 
 					<div key={post.id}
 						 className="comment">
 						<Link 	to={`post/${post.id}`}

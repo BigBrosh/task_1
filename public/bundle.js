@@ -23424,13 +23424,9 @@ var _postsApp = __webpack_require__(107);
 
 var _postsApp2 = _interopRequireDefault(_postsApp);
 
-var _MainPage = __webpack_require__(110);
+var _MainLayout = __webpack_require__(121);
 
-var _MainPage2 = _interopRequireDefault(_MainPage);
-
-var _ViewPage = __webpack_require__(118);
-
-var _ViewPage2 = _interopRequireDefault(_ViewPage);
+var _MainLayout2 = _interopRequireDefault(_MainLayout);
 
 var _CommentsPage = __webpack_require__(119);
 
@@ -23451,9 +23447,8 @@ function App() {
 			_react2.default.createElement(
 				_reactRouterDom.Switch,
 				null,
-				_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _MainPage2.default }),
-				_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/:id', component: _ViewPage2.default }),
-				_react2.default.createElement(_reactRouterDom.Route, { path: '/post/:id', component: _CommentsPage2.default })
+				_react2.default.createElement(_reactRouterDom.Route, { path: '/post/:id', component: _CommentsPage2.default }),
+				_react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _MainLayout2.default })
 			)
 		)
 	);
@@ -27397,154 +27392,14 @@ function posts() {
 }
 
 /***/ }),
-/* 110 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(13);
-
-var _requests = __webpack_require__(45);
-
-var _requests2 = _interopRequireDefault(_requests);
-
-var _actions = __webpack_require__(23);
-
-var _Users = __webpack_require__(112);
-
-var _Users2 = _interopRequireDefault(_Users);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var MainPage = function (_Component) {
-	_inherits(MainPage, _Component);
-
-	function MainPage() {
-		_classCallCheck(this, MainPage);
-
-		return _possibleConstructorReturn(this, (MainPage.__proto__ || Object.getPrototypeOf(MainPage)).apply(this, arguments));
-	}
-
-	_createClass(MainPage, [{
-		key: 'componentDidMount',
-		value: async function componentDidMount() {
-			if (this.props.users.length === 0) {
-				var _ref = await Promise.all([_requests2.default.getUsers(), _requests2.default.getAllPosts()]),
-				    _ref2 = _slicedToArray(_ref, 2),
-				    _users = _ref2[0],
-				    posts = _ref2[1];
-
-				this.props.addUsers(_users);
-				this.props.addPosts(posts);
-			}
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			return _react2.default.createElement(_Users2.default, null);
-		}
-	}]);
-
-	return MainPage;
-}(_react.Component);
-
-var mapStateToProps = function mapStateToProps(_ref3) {
-	var users = _ref3.users;
-	return { users: users };
-};
-
-var mapDispatchToProps = {
-	addUsers: _actions.addUsers,
-	addPosts: _actions.addPosts
-};
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MainPage);
-
-/***/ }),
+/* 110 */,
 /* 111 */
 /***/ (function(module, exports) {
 
 module.exports = {"url":"https://jsonplaceholder.typicode.com"}
 
 /***/ }),
-/* 112 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(16);
-
-var _reactRedux = __webpack_require__(13);
-
-__webpack_require__(113);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function Users(props) {
-	var users = props.users,
-	    posts = props.posts;
-
-
-	if (!users) return _react2.default.createElement(
-		'p',
-		null,
-		'No users in the list'
-	);
-
-	return _react2.default.createElement(
-		'div',
-		null,
-		users.map(function (user) {
-			return _react2.default.createElement(
-				_reactRouterDom.Link,
-				{ to: '' + user.id,
-					className: 'link main_page',
-					key: user.id },
-				user.name + ' (' + posts.reduce(function (cur, next) {
-					return cur + (next.userId === user.id ? 1 : 0);
-				}, 0) + ')'
-			);
-		})
-	);
-}
-
-var mapStateToProps = function mapStateToProps(_ref) {
-	var users = _ref.users,
-	    posts = _ref.posts;
-	return { users: users, posts: posts };
-};
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(Users);
-
-/***/ }),
+/* 112 */,
 /* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28196,13 +28051,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function UserPostsPage(props) {
 	var id = +props.match.params.id;
+	var posts = props.posts.filter(function (post) {
+		return post.userId === id;
+	});
+
+	if (posts.length === 0) return _react2.default.createElement(
+		'h2',
+		null,
+		'There are no posts yet'
+	);
 
 	return _react2.default.createElement(
 		'div',
 		null,
-		props.posts.filter(function (post) {
-			return post.userId === id;
-		}).map(function (post) {
+		posts.map(function (post) {
 			return _react2.default.createElement(
 				'div',
 				{ key: post.id,
@@ -28343,6 +28205,159 @@ var CommentsPage = function (_Component) {
 }(_react.Component);
 
 exports.default = CommentsPage;
+
+/***/ }),
+/* 120 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(16);
+
+var _reactRedux = __webpack_require__(13);
+
+__webpack_require__(113);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Users(props) {
+	var users = props.users,
+	    posts = props.posts;
+
+
+	if (!users) return _react2.default.createElement(
+		'p',
+		null,
+		'No users in the list'
+	);
+
+	return _react2.default.createElement(
+		'div',
+		null,
+		users.map(function (user) {
+			return _react2.default.createElement(
+				_reactRouterDom.Link,
+				{ to: '' + user.id,
+					className: 'link main_page',
+					key: user.id },
+				user.name + ' (' + posts.reduce(function (cur, next) {
+					return cur + (next.userId === user.id ? 1 : 0);
+				}, 0) + ')'
+			);
+		})
+	);
+}
+
+var mapStateToProps = function mapStateToProps(_ref) {
+	var users = _ref.users,
+	    posts = _ref.posts;
+	return { users: users, posts: posts };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Users);
+
+/***/ }),
+/* 121 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(13);
+
+var _reactRouterDom = __webpack_require__(16);
+
+var _requests = __webpack_require__(45);
+
+var _requests2 = _interopRequireDefault(_requests);
+
+var _actions = __webpack_require__(23);
+
+var _Users = __webpack_require__(120);
+
+var _Users2 = _interopRequireDefault(_Users);
+
+var _ViewPage = __webpack_require__(118);
+
+var _ViewPage2 = _interopRequireDefault(_ViewPage);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MainLayout = function (_Component) {
+	_inherits(MainLayout, _Component);
+
+	function MainLayout() {
+		_classCallCheck(this, MainLayout);
+
+		return _possibleConstructorReturn(this, (MainLayout.__proto__ || Object.getPrototypeOf(MainLayout)).apply(this, arguments));
+	}
+
+	_createClass(MainLayout, [{
+		key: 'componentDidMount',
+		value: async function componentDidMount() {
+			if (this.props.users.length === 0) {
+				var _ref = await Promise.all([_requests2.default.getUsers(), _requests2.default.getAllPosts()]),
+				    _ref2 = _slicedToArray(_ref, 2),
+				    _users = _ref2[0],
+				    posts = _ref2[1];
+
+				this.props.addUsers(_users);
+				this.props.addPosts(posts);
+			}
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Users2.default }),
+				_react2.default.createElement(_reactRouterDom.Route, { path: '/:id', component: _ViewPage2.default })
+			);
+		}
+	}]);
+
+	return MainLayout;
+}(_react.Component);
+
+var mapStateToProps = function mapStateToProps(_ref3) {
+	var users = _ref3.users;
+	return { users: users };
+};
+
+var mapDispatchToProps = {
+	addUsers: _actions.addUsers,
+	addPosts: _actions.addPosts
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MainLayout);
 
 /***/ })
 /******/ ]);

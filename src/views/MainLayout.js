@@ -2,11 +2,13 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
+import { Route, Switch } from 'react-router-dom'
 
 import requests from '../controllers/requests'
 import { addUsers, addPosts } from '../actions/actions'
 
-import Users from '../components/Users'
+import Users from './Users'
+import ViewPage from './ViewPage'
 
 type Props = {
   users: Array<Object>,
@@ -14,7 +16,7 @@ type Props = {
   addPosts: Function
 };
 
-class MainPage extends Component<Props> {
+class MainLayout extends Component<Props> {
 	async componentDidMount() {
 		if (this.props.users.length === 0) {
 			const [users, posts] = await Promise.all( [requests.getUsers(), requests.getAllPosts()])
@@ -25,7 +27,10 @@ class MainPage extends Component<Props> {
 
 	render() {
 		return (
-			<Users />
+			<div>
+				<Route exact path="/" component={Users} />
+				<Route path="/:id" component={ViewPage} />
+			</div>
 		);
 	}
 }
@@ -37,4 +42,4 @@ const mapDispatchToProps = {
 	addPosts
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MainLayout);
