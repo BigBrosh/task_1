@@ -27603,7 +27603,7 @@ exports = module.exports = __webpack_require__(115)(false);
 
 
 // module
-exports.push([module.i, "* {\n  margin: 0px;\n  padding: 0px;\n  box-sizing: border-box;\n  font-family: sans-serif; }\n\nbody {\n  padding: 10px; }\n\nbutton {\n  background: none;\n  border: none;\n  cursor: pointer;\n  font-size: 16px; }\n\n.link {\n  display: block;\n  text-decoration: none;\n  margin-bottom: 11px; }\n  .link.main_page {\n    color: blue; }\n  .link.post_page {\n    color: rgba(0, 0, 255, 0.7);\n    margin-bottom: 0px; }\n\n.post, .comment {\n  margin-bottom: 8px; }\n\n.back_button {\n  padding: 4px 8px;\n  margin-bottom: 10px;\n  border: 1px solid black; }\n", ""]);
+exports.push([module.i, ".button_with_hover, .back_button {\n  border: 1px solid rgba(0, 0, 0, 0.3);\n  transition: .3s; }\n  .button_with_hover:hover, .back_button:hover {\n    border-color: black;\n    transition: .3s; }\n\n* {\n  margin: 0px;\n  padding: 0px;\n  box-sizing: border-box;\n  font-family: sans-serif; }\n\nbody {\n  padding: 10px; }\n\nbutton {\n  background: none;\n  border: none;\n  cursor: pointer;\n  font-size: 16px; }\n\n.link {\n  display: block;\n  text-decoration: none;\n  margin-bottom: 11px; }\n  .link.main_page {\n    color: blue; }\n  .link.post_page {\n    color: rgba(0, 0, 255, 0.7);\n    margin-bottom: 0px; }\n\n.post, .comment {\n  margin-bottom: 8px; }\n\n.back_button {\n  padding: 4px 8px;\n  margin-bottom: 10px; }\n", ""]);
 
 // exports
 
