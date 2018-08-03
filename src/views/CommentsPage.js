@@ -39,11 +39,13 @@ class CommentsPage extends Component<Props, State> {
 
 		return (
 			<div>
-				<button onClick={() => this.props.history.goBack()}>Back</button>
+				<button onClick={() => this.props.history.goBack()}
+						className="back_button">Back</button>
 
 				{
 					this.state.comments.map(comment =>
-						<div key={comment.id}>
+						<div key={comment.id}
+							 className="comment">
 							<p>{`comment id is ${comment.id}`}</p>
 							<p>{comment.body}</p>
 						</div>
