@@ -23,8 +23,8 @@ function UserPostsPage(props: Props) {
 		<div>
 			{	
 				posts.map(post => 
-					<div key={post.id}
-						 className="comment">
+					<div 	key={post.id}
+						 	className="comment">
 						<Link 	to={`post/${post.id}`}
 								className="link post_page">
 							<p>{`Post id is ${post.id}`}</p>

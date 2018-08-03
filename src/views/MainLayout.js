@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
-import { Route, Switch } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 import requests from '../controllers/requests'
 import { addUsers, addPosts } from '../actions/actions'
