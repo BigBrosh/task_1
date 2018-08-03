@@ -1,9 +1,15 @@
+// @flow
 import React from 'react'
 
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 
-function Users(props) {
+type Props = {
+	users: Array<Object>,
+	posts: Array<Object>
+};
+
+function Users(props: Props) {
 	const { users, posts } = props;
 		
 	if(!users)

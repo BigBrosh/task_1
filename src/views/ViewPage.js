@@ -1,10 +1,16 @@
+// @flow
 import React from 'react';
 
 import {Link} from 'react-router-dom'
 
 import { connect } from 'react-redux'
 
-function UserPostsPage(props) {
+type Props = {
+  posts: Array<Object>,
+  match:Object
+};
+
+function UserPostsPage(props: Props) {
 	const id = +props.match.params.id;
 
 	return (

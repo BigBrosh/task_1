@@ -1,7 +1,17 @@
+// @flow
 import React, { Component } from 'react';
 import requests from '../controllers/requests'
 
-class CommentsPage extends Component {
+type Props = {
+	match: Object,
+	history: Object
+};
+
+type State = {
+	comments: null | Array<Object>
+};
+
+class CommentsPage extends Component<Props, State> {
 	state = {
 		comments: null
 	}
@@ -11,7 +21,7 @@ class CommentsPage extends Component {
 		await this.getComments(id);
 	}
 
-	getComments = async (id) => {
+	getComments = async (id: number) => {
 		try {
 			const comments = await requests.getComments(id);
 

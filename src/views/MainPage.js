@@ -10,7 +10,6 @@ import Users from '../components/Users'
 
 type Props = {
   users: Array<Object>,
-  props: Array<Object>,
   addUsers: Function,
   addPosts: Function
 };
@@ -24,11 +23,7 @@ class MainPage extends Component<Props> {
 		}
 	}
 
-	say = (a: number) => a;
-
 	render() {
-		console.log(this.say(1));
-
 		return (
 			<Users />
 		);
